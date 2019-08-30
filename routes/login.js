@@ -4,7 +4,6 @@ var jwt = require('jsonwebtoken');
 
 var SEED = require('../config/config').SEED;
 
-
 var app = express();
 var Usuario = require('../models/usuario');
 
@@ -29,6 +28,7 @@ app.post('/', (req, res) => {
                 errors: err
             });
         }
+
         if (!bcrypt.compareSync(body.password, usuarioDB.password)) {
             return res.status(400).json({
                 ok: false,
@@ -36,6 +36,7 @@ app.post('/', (req, res) => {
                 errors: err
             });
         }
+
         // Crear un token!!!
         usuarioDB.password = ':)';
 
@@ -46,9 +47,10 @@ app.post('/', (req, res) => {
             usuario: usuarioDB,
             token: token,
             id: usuarioDB._id
-
         });
+
     })
+
 
 });
 
